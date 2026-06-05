@@ -1,98 +1,132 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Dashboard from "./Dashboard";
+
+const USERNAME = "admin";
+const PASSWORD = "cleverdev2026";
 
 export default function App() {
 
-  const [profiles, setProfiles] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] =
+    useState(false);
 
-  useEffect(() => {
+  const [username, setUsername] =
+    useState("");
 
-    fetch("/linkedin-dashboard/data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setProfiles(data);
-      });
+  const [password, setPassword] =
+    useState("");
 
-  }, []);
+  function handleLogin() {
 
-  return (
-    <div className="min-h-screen bg-slate-900 text-white p-8">
+    if (
+      username === USERNAME &&
+      password === PASSWORD
+    ) {
 
-      <h1 className="text-4xl font-bold mb-8">
-        LinkedIn Analytics Dashboard
-      </h1>
+      setIsAuthenticated(true);
 
-      <div className="space-y-8">
+    } else {
 
-        {profiles.map((profile, index) => (
+      alert("Invalid credentials");
+    }
+  }
 
-          <div
-            key={index}
-            className="bg-slate-800 rounded-xl p-6"
-          >
+  if (!isAuthenticated) {
 
-            <h2 className="text-2xl font-semibold break-all">
-              {profile.profile}
-            </h2>
+    return (
 
-            <div className="flex gap-6 mt-4">
+      <div className="
+        min-h-screen
+        flex
+        items-center
+        justify-center
+        bg-[#F8FAFC]
+        px-6
+      ">
 
-              <div>
-                Total Posts:
-                <span className="ml-2 font-bold">
-                  {profile.total_posts}
-                </span>
-              </div>
+        <div className="
+          w-full
+          max-w-md
+          bg-white
+          border border-[#E2E8F0]
+          rounded-[32px]
+          p-10
+          shadow-sm
+        ">
 
-              <div>
-                Original:
-                <span className="ml-2 font-bold text-green-400">
-                  {profile.original_posts}
-                </span>
-              </div>
+          <div className="
+            text-sm
+            tracking-[0.25em]
+            uppercase
+            text-[#2563EB]
+            font-semibold
+          ">
+            CleverDev Intelligence
+          </div>
 
-              <div>
-                Reposts:
-                <span className="ml-2 font-bold text-red-400">
-                  {profile.reposts}
-                </span>
-              </div>
+          <h1 className="
+            text-4xl
+            font-semibold
+            mt-5
+            leading-tight
+          ">
+            Secure Dashboard Access
+          </h1>
 
-            </div>
+          <div className="mt-8 space-y-4">
 
-            <div className="mt-6 space-y-3">
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) =>
+                setUsername(e.target.value)
+              }
+              className="
+                w-full
+                border border-[#E2E8F0]
+                rounded-2xl
+                px-5 py-4
+                outline-none
+              "
+            />
 
-              {profile.original_posts_data?.map((post, i) => (
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) =>
+                setPassword(e.target.value)
+              }
+              className="
+                w-full
+                border border-[#E2E8F0]
+                rounded-2xl
+                px-5 py-4
+                outline-none
+              "
+            />
 
-                <div
-                  key={i}
-                  className="bg-slate-700 rounded-lg p-4 flex justify-between items-center gap-4"
-                >
-
-                  <a
-                    href={post.post_url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-blue-400 hover:underline break-all"
-                  >
-                    {post.post_url}
-                  </a>
-
-                  <div className="font-bold whitespace-nowrap">
-                    👍 {post.reaction_count}
-                  </div>
-
-                </div>
-
-              ))}
-
-            </div>
+            <button
+              onClick={handleLogin}
+              className="
+                w-full
+                bg-[#2563EB]
+                text-white
+                rounded-2xl
+                py-4
+                font-medium
+              "
+            >
+              Access Dashboard
+            </button>
 
           </div>
 
-        ))}
+        </div>
 
       </div>
+    );
+  }
 
-    </div>
-  );
+  return <Dashboard />;
 }
