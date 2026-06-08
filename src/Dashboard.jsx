@@ -263,7 +263,7 @@ export default function Dashboard() {
               text-[#2563EB]
               font-semibold
             ">
-              CleverDev Intelligence
+              LinkedIN Intelligence
             </div>
 
             <div className="
@@ -313,7 +313,7 @@ export default function Dashboard() {
               leading-8
             ">
 
-              This contains the LinkedIn profiles of top competitors for CleverDev
+              This contains the LinkedIn profiles
 
             </p>
 
