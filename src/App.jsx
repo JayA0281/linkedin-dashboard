@@ -60,7 +60,7 @@ export default function App() {
             text-[#2563EB]
             font-semibold
           ">
-            CleverDev Intelligence
+            LinkedIN Intelligence
           </div>
 
           <h1 className="
