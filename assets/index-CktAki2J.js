@@ -34,7 +34,7 @@ Error generating stack: `+e.message+`
               uppercase\r
               text-[#2563EB]\r
               font-semibold\r
-            `,children:`CleverDev Intelligence`}),(0,S.jsx)(`div`,{className:`\r
+            `,children:`LinkedIN Intelligence`}),(0,S.jsx)(`div`,{className:`\r
               text-2xl\r
               font-semibold\r
               mt-1\r
@@ -55,7 +55,7 @@ Error generating stack: `+e.message+`
             `,children:`Contact database for Competitors`}),(0,S.jsx)(`p`,{className:`\r
               text-[#64748B]\r
               leading-8\r
-            `,children:`This contains the LinkedIn profiles of top competitors for CleverDev`})]}),(0,S.jsx)(`div`,{className:`\r
+            `,children:`This contains the LinkedIn profiles`})]}),(0,S.jsx)(`div`,{className:`\r
             bg-[#EFF6FF]\r
             border border-[#DBEAFE]\r
             rounded-[32px]\r
@@ -221,7 +221,7 @@ Error generating stack: `+e.message+`
             uppercase
             text-[#2563EB]
             font-semibold
-          `,children:`CleverDev Intelligence`}),(0,S.jsx)(`h1`,{className:`
+          `,children:`LinkedIN Intelligence`}),(0,S.jsx)(`h1`,{className:`
             text-4xl
             font-semibold
             mt-5
