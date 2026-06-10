@@ -16,6 +16,8 @@ export default function Dashboard() {
   const [minPosts, setMinPosts] = useState("");
   const [minReactions, setMinReactions] =
     useState("");
+  const [timeFilter, setTimeFilter] =
+    useState("");
 
   const [selectedCompanies, setSelectedCompanies] =
     useState([]);
@@ -390,6 +392,50 @@ export default function Dashboard() {
                 "
               />
 
+              {/* TIME FILTER */}
+
+              <select
+                value={timeFilter}
+                onChange={(e) =>
+                  setTimeFilter(e.target.value)
+                }
+                className="
+                  w-full
+                  bg-white
+                  border border-[#E2E8F0]
+                  rounded-2xl
+                  px-4 py-2
+                  outline-none
+                  text-lg
+                "
+              >
+              
+                <option value="">
+                  All Time
+                </option>
+              
+                <option value="24h">
+                  Last 24 Hours
+                </option>
+              
+                <option value="1w">
+                  Last Week
+                </option>
+              
+                <option value="1mo">
+                  Last Month
+                </option>
+              
+                <option value="6mo">
+                  Last 6 Months
+                </option>
+              
+                <option value="1yr">
+                  Last Year
+                </option>
+              
+              </select>
+
             </div>
 
           </div>
@@ -562,6 +608,7 @@ export default function Dashboard() {
                 key={index}
                 profile={profile}
                 minReactions={minReactions}
+                timeFilter={timeFilter}
               />
 
             );
@@ -581,10 +628,110 @@ export default function Dashboard() {
 
 function ExpandableRow({
   profile,
-  minReactions
+  minReactions,
+  timeFilter
 }) {
 
   const [open, setOpen] = useState(false);
+  function matchesTimeFilter(postTime) {
+
+  if (!timeFilter) {
+    return true;
+  }
+
+  if (!postTime) {
+    return false;
+  }
+
+  const text =
+    postTime.toLowerCase().trim();
+
+  // ============================================
+  // EXTRACT NUMBER + UNIT
+  // ============================================
+
+  const match =
+    text.match(/^(\d+)([a-z]+)/);
+
+  if (!match) {
+    return false;
+  }
+
+  const value =
+    parseInt(match[1]);
+
+  const unit =
+    match[2];
+
+  // ============================================
+  // CONVERT EVERYTHING TO HOURS
+  // ============================================
+
+  let hours = 0;
+
+  switch (unit) {
+
+    case "m":
+      hours = value / 60;
+      break;
+
+    case "h":
+      hours = value;
+      break;
+
+    case "d":
+      hours = value * 24;
+      break;
+
+    case "w":
+      hours = value * 24 * 7;
+      break;
+
+    case "mo":
+      hours = value * 24 * 30;
+      break;
+
+    case "yr":
+      hours = value * 24 * 365;
+      break;
+
+    default:
+      return false;
+  }
+
+  // ============================================
+  // APPLY FILTER
+  // ============================================
+
+  switch (timeFilter) {
+
+    case "24h":
+      return hours <= 24;
+
+    case "1w":
+      return hours <= (
+        24 * 7
+      );
+
+    case "1mo":
+      return hours <= (
+        24 * 30
+      );
+
+    case "6mo":
+      return hours <= (
+        24 * 30 * 6
+      );
+
+    case "1yr":
+      return hours <= (
+        24 * 365
+      );
+
+    default:
+      return true;
+  }
+  }
 
   return (
 
@@ -679,11 +826,25 @@ function ExpandableRow({
           <div className="space-y-0">
 
             {(profile.original_post_data || [])
-              .filter(
-                (post) =>
-                  (post.reaction_count || 0)
-                  >= minReactions
-              ).length === 0 && (
+
+            .filter((post) => {
+            
+              const reactionMatch =
+            
+                (post.reaction_count || 0)
+                >= minReactions;
+            
+              const timeMatch =
+            
+                matchesTimeFilter(
+                  post.post_time
+                );
+              
+              return (
+                reactionMatch &&
+                timeMatch
+              );
+            }).length === 0 && (
 
               <div className="
                 text-sm
@@ -696,11 +857,24 @@ function ExpandableRow({
             )}
 
             {(profile.original_post_data || [])
-              .filter(
-                (post) =>
+              .filter((post) => {
+
+                const reactionMatch =
+
                   (post.reaction_count || 0)
-                  >= minReactions
-              )
+                  >= minReactions;
+
+                const timeMatch =
+
+                  matchesTimeFilter(
+                    post.post_time
+                  );
+
+                return (
+                  reactionMatch &&
+                  timeMatch
+                );
+              })
               .map((post, i) => (
 
               <div
