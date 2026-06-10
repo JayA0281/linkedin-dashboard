@@ -55,7 +55,7 @@ Error generating stack: `+e.message+`
             `,children:`Contact database for Competitors`}),(0,S.jsx)(`p`,{className:`\r
               text-[#64748B]\r
               leading-8\r
-            `,children:`This contains the LinkedIn profiles`})]}),(0,S.jsx)(`div`,{className:`\r
+            `,children:`This contains the LinkedIn profiles. Timeline data is relative to 10th June, 2026.`})]}),(0,S.jsx)(`div`,{className:`\r
             bg-[#EFF6FF]\r
             border border-[#DBEAFE]\r
             rounded-[32px]\r
@@ -197,10 +197,21 @@ Error generating stack: `+e.message+`
                     hover:underline\r
                     break-all\r
                   `,children:e.post_url||e}),(0,S.jsxs)(`div`,{className:`\r
-                  whitespace-nowrap\r
-                  font-medium\r
-                  text-[#64748B]\r
-                `,children:[e.reaction_count||0,` reactions`]})]},t))]})})]})}var te=`admin`,ne=`cleverdev2026`;function T(){let[e,t]=(0,x.useState)(!1),[n,r]=(0,x.useState)(``),[i,a]=(0,x.useState)(``);function o(){n===te&&i===ne?t(!0):alert(`Invalid credentials`)}return e?(0,S.jsx)(C,{}):(0,S.jsx)(`div`,{className:`
+  flex\r
+  items-center\r
+  gap-6\r
+  whitespace-nowrap\r
+  text-sm\r
+`,children:[(0,S.jsx)(`div`,{className:`\r
+    text-[#64748B]\r
+    min-w-[60px]\r
+    text-right\r
+  `,children:e.post_time||`-`}),(0,S.jsxs)(`div`,{className:`\r
+    font-medium\r
+    text-[#64748B]\r
+    min-w-[100px]\r
+    text-right\r
+  `,children:[e.reaction_count||0,` reactions`]})]})]},t))]})})]})}var te=`admin`,ne=`cleverdev2026`;function T(){let[e,t]=(0,x.useState)(!1),[n,r]=(0,x.useState)(``),[i,a]=(0,x.useState)(``);function o(){n===te&&i===ne?t(!0):alert(`Invalid credentials`)}return e?(0,S.jsx)(C,{}):(0,S.jsx)(`div`,{className:`
         min-h-screen
         flex
         items-center
