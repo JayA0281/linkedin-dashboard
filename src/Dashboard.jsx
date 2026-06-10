@@ -313,7 +313,7 @@ export default function Dashboard() {
               leading-8
             ">
 
-              This contains the LinkedIn profiles
+              This contains the LinkedIn profiles. Timeline data is relative to 10th June, 2026.
 
             </p>
 
@@ -731,13 +731,38 @@ function ExpandableRow({
                   {post.post_url || post}
                 </a>
 
-                <div className="
-                  whitespace-nowrap
-                  font-medium
-                  text-[#64748B]
-                ">
-                  {post.reaction_count || 0} reactions
-                </div>
+                
+<div className="
+  flex
+  items-center
+  gap-6
+  whitespace-nowrap
+  text-sm
+">
+
+  {/* TIMELINE */}
+
+  <div className="
+    text-[#64748B]
+    min-w-[60px]
+    text-right
+  ">
+    {post.post_time || "-"}
+  </div>
+
+  {/* REACTIONS */}
+
+  <div className="
+    font-medium
+    text-[#64748B]
+    min-w-[100px]
+    text-right
+  ">
+    {post.reaction_count || 0} reactions
+  </div>
+
+</div>
+
 
               </div>
             ))}
